@@ -1,12 +1,7 @@
-import React from 'react'
-import ProductManagement from './Product'
+import ProductManagement from './ProductManagement'
 
-const App = () => {
-  return (
-    <>
-    <ProductManagement/>
-    </>
-  )
+function App() {
+  return <ProductManagement />
 }
 
 export default App
