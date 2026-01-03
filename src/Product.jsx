@@ -18,7 +18,12 @@ const initialProducts = [
 ];
 
 const ProductManagement = () => {
-  const [products, setProducts] = useState(initialProducts);
+  // Load products from localStorage or use initial data
+  const [products, setProducts] = useState(() => {
+    const savedProducts = localStorage.getItem('products');
+    return savedProducts ? JSON.parse(savedProducts) : initialProducts;
+  });
+  
   const [viewMode, setViewMode] = useState('card'); // 'card' or 'list'
   const [searchTerm, setSearchTerm] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
@@ -37,6 +42,11 @@ const ProductManagement = () => {
   });
   
   const [formErrors, setFormErrors] = useState({});
+
+  // Save products to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem('products', JSON.stringify(products));
+  }, [products]);
 
   // Debounce search term
   useEffect(() => {
